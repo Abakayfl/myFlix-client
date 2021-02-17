@@ -1,67 +1,47 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import axios from 'axios';
-
+import PropTypes from 'prop-types';
 import './login-view.scss';
-
-import { Form, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 export function LoginView(props) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleSubmit = (e) => {
+    const attemptLogin = (e) => {
         e.preventDefault();
-        /* Send a request to the server for authentication */
+        console.log(username, password);
         axios.post('https://my-flix1.herokuapp.com/login', {
             Username: username,
             Password: password
+        }).then((response) => {
+            const data = response.data;
+            props.onLoggedIn(data)
+        }).catch((error) => {
+            console.log('Username or Password is incorrect.')
         })
-            .then(response => {
-                const data = response.data;
-                props.onLoggedIn(data);
-            })
-            .catch(e => {
-                console.log('no such user')
-            });
     };
 
     return (
-        <React.Fragment>
-            <Form className='login-form'>
-                <h1 className='login-header'>Login Here:</h1>
-                <Form.Group controlId='formBasicEmail'>
-                    <Form.Label>Username</Form.Label>
-                    <Form.Control
-                        type='text'
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                        placeholder='Your Username goes here!'
-                    />
-                </Form.Group>
-                <Form.Group controlId='formBasicPassword'>
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control
-                        type='password'
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        type='password'
-                        placeholder='Your password goes here!'
-                    />
-                </Form.Group>
-                <Button onClick={handleSubmit} variant='dark' type='submit'>
-                    Login
-                </Button>
-            </Form>
-        </React.Fragment>
-    );
+        <div className="login-container">
+            <form className="login-form">
+                <label className="label" htmlFor="username">Username</label>
+                <input id="username" placeholder="Username" type="text" value={username} onChange={e => setUsername(e.target.value)} />
+                <label className="label" htmlFor="password">Password</label>
+                <input id="password" placeholder="Password" type="password" value={password} onChange={e => setPassword(e.target.value)} />
+                <button className="login-login-btn" type="button" onClick={attemptLogin}>Sign In</button>
+                <Link to="/register"><button className="login-register-btn" type="button">New User?</button></Link>
+            </form>
+        </div>
+
+    )
 }
 
 LoginView.propTypes = {
-    user: PropTypes.shape({
-        username: PropTypes.string.isRequired,
-        pasword: PropTypes.string.isRequired
-    }),
-    onLoggedIn: PropTypes.func.isRequired,
-    onRegister: PropTypes.func
-};
+    onChange: PropTypes.func,
+    onClick: PropTypes.func
+}
+
+export default LoginView;
+
+

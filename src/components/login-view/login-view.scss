@@ -1,9 +1,53 @@
+@mixin flex-column-standard {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  margin: 50px 50px;
+  justify-content: center;
+  align-items: center;
+}
+
 .login-form {
-    margin: 20px;
-    padding: 30px;
-  }
+  display: flex;
+  flex-direction: column;
+  margin: 20px 20px;
+  min-width: 300px;
+}
+
+input {
+  padding: 10px 10px;
+  margin: 10px 10px;
+  max-width: 300px;
+}
+
+.login-login-btn {
+  margin: 10px;
+  max-width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   
-  .login-header {
-    text-align: center;
-  }
+}
+
+.login-register-btn {
+  margin: 10px;
+  min-width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   
+}
+
+@mixin flex-column-standard {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  text-align: center;
+}
