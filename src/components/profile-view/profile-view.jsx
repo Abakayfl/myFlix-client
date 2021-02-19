@@ -1,5 +1,5 @@
 import React from "react";
-// import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
@@ -60,9 +60,9 @@ export class ProfileView extends React.Component {
     removeFavorite(movie) {
         let token = localStorage.getItem("token");
         let url =
-            "https://https://my-flix1.herokuapp.com/users/" +
+            "https://my-flix1.herokuapp.com/users/" +
             localStorage.getItem("user") +
-            "/movie/" +
+            "/movies/" +
             movie._id;
         axios
             .delete(url, {
@@ -73,7 +73,6 @@ export class ProfileView extends React.Component {
                 this.componentDidMount();
             });
     }
-
     handleDelete() {
         let token = localStorage.getItem("token");
         let user = localStorage.getItem("user");
@@ -175,6 +174,6 @@ export class ProfileView extends React.Component {
     }
 }
 
-// ProfileView.propTypes = {
-//     movies: PropTypes.array.isRequired,
-// };
+ProfileView.propTypes = {
+    movies: PropTypes.array.isRequired,
+};
