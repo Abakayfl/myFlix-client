@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
@@ -24,7 +24,7 @@ export function RegisterView(props) {
             console.log(data);
             window.open('/', '_self');
         }).catch((error) => {
-            console.log('Error with Registration')
+            console.log(error)
         })
     }
 
@@ -45,9 +45,9 @@ export function RegisterView(props) {
     )
 }
 
-RegisterView.propTypes = {
-    onChange: PropTypes.func,
-    onClick: PropTypes.func
-}
+// RegisterView.propTypes = {
+//     onChange: PropTypes.func,
+//     onClick: PropTypes.func
+// }
 
 export default RegisterView;

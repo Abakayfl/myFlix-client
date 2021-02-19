@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import './login-view.scss';
 import { Link } from 'react-router-dom';
 
@@ -17,9 +17,10 @@ export function LoginView(props) {
         }).then((response) => {
             const data = response.data;
             props.onLoggedIn(data)
-        }).catch((error) => {
-            console.log('Username or Password is incorrect.')
-        })
+        }).catch((e) => {
+            console.log(e);
+            alert("No such user");
+        });
     };
 
     return (
@@ -37,10 +38,10 @@ export function LoginView(props) {
     )
 }
 
-LoginView.propTypes = {
-    onChange: PropTypes.func,
-    onClick: PropTypes.func
-}
+// LoginView.propTypes = {
+//     onChange: PropTypes.func,
+//     onClick: PropTypes.func
+// }
 
 export default LoginView;
 

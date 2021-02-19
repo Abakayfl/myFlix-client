@@ -3,24 +3,33 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-// import { Card, Button } from 'react-bootstrap';
+// import Button from 'react-bootstrap';
 
 import './movie-view.scss';
 
 export class MovieView extends React.Component {
     constructor() {
         super();
+
+        this.state = {};
     }
 
     addtoFavorites(movie) {
         let token = localStorage.getItem('token');
-        let url = "https://my-flix1.herokuapp.com/users/" + localStorage.getItem('user') + "/favorites/" + movie._id;
+        let url = "https://my-flix1.herokuapp.com/users/" + localStorage.getItem('user') + "/movies/" + movie._id;
+
+        console.log(token);
+
         axios.post(url, "", {
             headers: { Authorization: `Bearer ${token}` },
         }).then((response) => {
             console.log(response);
-        }).catch((error) => {
-            console.log('Error Adding movie to favorites.')
+            window.open("/", "_self");
+            window.open("/users/" + localStorage.getItem("user"), "_self");
+            alert("Added to favorites!");
+        }).catch((e) => {
+            console.log(e);
+            alert("Error adding movie to favorites");
         });
     }
 
@@ -29,6 +38,7 @@ export class MovieView extends React.Component {
         if (!movie) return null;
 
         return (
+
             <div className="movie-view">
                 <img className="movie-poster" src={movie.ImagePath} />
                 <div className="movie-info">
@@ -52,20 +62,20 @@ export class MovieView extends React.Component {
     }
 }
 
-MovieView.propTypes = {
-    movie: PropTypes.shape({
-        Title: PropTypes.string.isRequired,
-        Description: PropTypes.string.isRequired,
-        ImagePath: PropTypes.string.isRequired,
-        Director: PropTypes.shape({
-            Name: PropTypes.string.isRequired,
-            Bio: PropTypes.string,
-        }),
-        Genre: PropTypes.shape({
-            Name: PropTypes.string.isRequired,
-            Description: PropTypes.string
-        }),
-    }).isRequired
-};
+// MovieView.propTypes = {
+//     movie: PropTypes.shape({
+//         Title: PropTypes.string.isRequired,
+//         Description: PropTypes.string.isRequired,
+//         ImagePath: PropTypes.string.isRequired,
+//         Director: PropTypes.shape({
+//             Name: PropTypes.string.isRequired,
+//             Bio: PropTypes.string,
+//         }),
+//         Genre: PropTypes.shape({
+//             Name: PropTypes.string.isRequired,
+//             Description: PropTypes.string
+//         }),
+//     }).isRequired
+// };
 
 export default MovieView;

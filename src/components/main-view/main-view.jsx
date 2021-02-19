@@ -10,6 +10,7 @@ import { RegisterView } from '../register-view/register-view';
 import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
 import { ProfileView } from '../profile-view/profile-view';
+import { ProfileUpdate } from '../profile-update/profile-update';
 
 
 import './main-view.scss'
@@ -64,27 +65,30 @@ export class MainView extends React.Component {
         localStorage.clear();
         this.setState({
             user: null
+
         })
+
     }
 
     render() {
         const { user, movies } = this.state;
         const { movie } = this.props;
 
-
         return (
             <Router>
                 <div className="main-view">
                     <div className="nav">
                         <h1>MyFlix</h1>
-                        <div className="nav-button-flex">
-                            <Link to="/users/:userId">
-                                {/* <button className="account-btn">
-                                    Profile
-                                </button> */}
-                            </Link>
-                            <Link to="/" ><button onClick={() => this.onSignOut()} className="signout-btn">Sign Out</button></Link>
-                        </div>
+                        {user &&
+                            <div className="nav-button-flex">
+                                <Link to="/users/:userId">
+                                    <button className="account-btn">
+                                        Profile
+                                </button>
+                                </Link>
+                                <Link to="/" ><button onClick={() => this.onSignOut()} className="signout-btn">Sign Out</button></Link>
+                            </div>
+                        }
                     </div>
                     <div className="movie-grid">
                         <Route exact path="/" render={() => {
@@ -92,7 +96,6 @@ export class MainView extends React.Component {
                             return movies.map(movie => <MovieCard className="moviecard" key={movie._id} movie={movie} />)
                         }
                         } />
-
                         <Route path="/movies/:movieId" render={({ match }) => <MovieView movie={movies.find(movie => movie._id === match.params.movieId)} />} />
                         <Route path="/register" render={() => <RegisterView />} />
                         <Route path="/directors/:name" render={({ match }) => {
@@ -110,7 +113,7 @@ export class MainView extends React.Component {
                         }}
                         />
                         <Route path="/update/:userId" render={() => {
-                            return <UpdateView />
+                            return <ProfileUpdate />
                         }}
                         />
                     </div>

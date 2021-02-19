@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import './director-view.scss';
 import MovieCard from '../movie-card/movie-card';
@@ -43,14 +43,15 @@ export class DirectorView extends React.Component {
     }
 }
 
-DirectorView.propTypes = {
-    movie: PropTypes.shape({
-        Director: PropTypes.shape({
-            Name: PropTypes.string.isRequired,
-            Birthday: PropTypes.string.isRequired,
-            Bio: PropTypes.string.isRequired
-        })
-    }).isRequired
-}
+// DirectorView.propTypes = {
+//     movie: PropTypes.shape({
+//         Director: PropTypes.shape({
+//             Name: PropTypes.string.isRequired,
+//             Birthday: PropTypes.string.isRequired,
+//             Bio: PropTypes.string.isRequired
+//         })
+//     }).isRequired
+// }
+
 
 export default DirectorView;
