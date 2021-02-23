@@ -5,6 +5,8 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import "./profile-view.scss";
 
+import { connect } from 'react-redux';
+
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
@@ -177,3 +179,5 @@ export class ProfileView extends React.Component {
 ProfileView.propTypes = {
     movies: PropTypes.array.isRequired,
 };
+
+export default connect(ProfileView);

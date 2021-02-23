@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+
 
 // import { Form, Button } from 'react-bootstrap';
 
@@ -45,9 +47,15 @@ export function RegisterView(props) {
     )
 }
 
-// RegisterView.propTypes = {
-//     onChange: PropTypes.func,
-//     onClick: PropTypes.func
-// }
+RegisterView.propTypes = {
+    onChange: PropTypes.func,
+    onClick: PropTypes.func
+}
 
-export default RegisterView;
+const mapDispatchToProps = (dispatch) => ({
+    registerAccount: (username, password) =>
+        dispatch(registerAccount(username, password)),
+
+});
+
+export default connect(null, mapDispatchToProps)(RegisterView);
